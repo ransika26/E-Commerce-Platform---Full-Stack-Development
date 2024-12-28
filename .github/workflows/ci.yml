@@ -18,14 +18,22 @@ jobs:
         node-version: 20.x
         cache: 'npm'
     - name: Install Backend Dependencies
-      run: npm install
-      working-directory: ./Back-end
+      run: |
+        if [ ! -f Back-end/package-lock.json ]; then
+          npm install
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add package-lock.json
+          git commit -m "Add missing package-lock.json"
+          git push
+        fi
+      working-directory: Back-end
     - name: Build Backend
       run: npm run build --if-present
-      working-directory: ./Back-end
+      working-directory: Back-end
     - name: Test Backend
       run: npm test
-      working-directory: ./Back-end
+      working-directory: Back-end
 
   frontend-build:
     runs-on: ubuntu-latest
@@ -38,11 +46,19 @@ jobs:
         node-version: 20.x
         cache: 'npm'
     - name: Install Frontend Dependencies
-      run: npm install
-      working-directory: ./Front-end
+      run: |
+        if [ ! -f Front-end/package-lock.json ]; then
+          npm install
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add package-lock.json
+          git commit -m "Add missing package-lock.json"
+          git push
+        fi
+      working-directory: Front-end
     - name: Build Frontend
       run: npm run build --if-present
-      working-directory: ./Front-end
+      working-directory: Front-end
     - name: Test Frontend
       run: npm test
-      working-directory: ./Front-end
+      working-directory: Front-end

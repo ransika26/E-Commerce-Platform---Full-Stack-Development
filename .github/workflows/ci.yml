@@ -23,11 +23,11 @@ jobs:
           frontend/package-lock.json
 
     - name: Install Backend Dependencies
-      working-directory: ./backend
+      working-directory: ./Back-end
       run: npm ci
 
     - name: Install Frontend Dependencies
-      working-directory: ./frontend
+      working-directory: ./Front-end
       run: npm ci
 
     - name: Build Backend

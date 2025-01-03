@@ -1,4 +1,4 @@
-name: Node.js CI with Lockfiles
+name: Node.js CI
 
 on:
   push:
@@ -23,11 +23,11 @@ jobs:
           frontend/package-lock.json
 
     - name: Install Backend Dependencies
-      working-directory: ./Back-end
+      working-directory: ./backend
       run: npm ci
 
     - name: Install Frontend Dependencies
-      working-directory: ./Front-end
+      working-directory: ./frontend
       run: npm ci
 
     - name: Build Backend
